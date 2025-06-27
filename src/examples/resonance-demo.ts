@@ -1,9 +1,9 @@
-import { PUTMANWaveAnalyzer } from '../analyzers/PUTMANWaveAnalyzer'
+import { PUTMANWaveAnalyzer } from '../modules/PUTMANWaveAnalyzer'
 import { ResonanceEngine }    from '../engine/ResonanceEngine'
 
-const sample: number[] = []
-const analyzer = new PUTMANWaveAnalyzer()
+const sample: string[] = ['hello', 'world', 'this', 'is', 'a', 'test']
+const analyzer = PUTMANWaveAnalyzer
 const engine = new ResonanceEngine()
 
-console.log(analyzer.analyze(sample))
+console.log(analyzer.analyze(sample, []))
 console.log(engine.run(sample))

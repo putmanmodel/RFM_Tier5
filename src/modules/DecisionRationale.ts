@@ -1,15 +1,17 @@
 import { Rationale } from './SelfAudit'
 
 /**  
- * Finite set of behaviour-state tags for your state machine.  
+ * Finite set of behavior-state tags for your state machine.  
  */
 export type StateTag = 
-  | 'guarded'
   | 'friendly'
-  | 'hesitant'
   | 'neutral'
+  | 'guarded'
+  | 'hesitant'
+  | 'tense'
+  | 'hostile'
   | 'snarky'
-  | 'none'   
+  | 'none'
 
 /**
  * Maps internal audit state into human-friendly behavior reasons.
@@ -42,25 +44,27 @@ export class DecisionRationale {
   }
 
   /**
-   * Map flagged channels into a suggested behaviour state.
+   * Map flagged channels into a suggested behavior state.
    * Returns 'none' if no special state applies.
    */
   static suggestState(r: Rationale): StateTag {
-    const { flaggedChannels } = r
+    const c = r.flaggedChannels
 
-    if (flaggedChannels.includes('suspicion') ||
-        flaggedChannels.includes('anger')) {
-      return 'guarded'
+    if (c.includes('anger') && c.includes('suspicion')) {
+      return 'hostile'
     }
-    if (flaggedChannels.includes('joy') && 
-        !flaggedChannels.includes('fear')) {
-      return 'friendly'
+    if (c.includes('anger') || c.includes('suspicion')) {
+      return 'tense'
     }
-    if (flaggedChannels.includes('fear') && 
-        flaggedChannels.includes('surprise')) {
+    if (c.includes('fear') && c.includes('surprise')) {
       return 'hesitant'
     }
-    // add more rules here as you expand your emotion DSL…
+    if (c.includes('joy') && !c.includes('fear')) {
+      return 'friendly'
+    }
+    if (c.length === 0) {
+      return 'neutral'
+    }
 
     return 'none'
   }

@@ -1,16 +1,24 @@
 /**
  * Relational field between two agents’ emotion streams.
- * All components range from -1 to +1, where >0 indicates positive pull.
+ * 
+ * – tension, attraction, repulsion: range −1 to +1  
+ * – symbolicClash, humorSync, overlap, divergence: range 0 to +1  
+ * 
+ * Positive values always indicate a “pull” or alignment effect.
  */
 export interface FieldVector {
-  /** Angular tension or conflict */
-  tension: number
-  /** Mutual positive pull */
-  attraction: number
-  /** Mutual repulsion or avoidance */
-  repulsion: number
-  /** Degree of symbolic conflict (0–1) */
-  symbolicClash: number
-  /** Optional humor alignment (0–1) */
-  humorSync?: number
+  /** Angular tension or conflict (−1 to +1) */
+  tension: number;
+  /** Mutual positive pull (−1 to +1) */
+  attraction: number;
+  /** Mutual repulsion or avoidance (−1 to +1) */
+  repulsion: number;
+  /** Degree of symbolic conflict (0 to +1) */
+  symbolicClash: number;
+  /** Degree of humor alignment (0 to +1) */
+  humorSync?: number;
+  /** Degree of overlap or shared context (0 to +1) */
+  overlap: number;
+  /** Degree of semantic drift or oppositional framing (0 to +1) */
+  divergence?: number;
 }

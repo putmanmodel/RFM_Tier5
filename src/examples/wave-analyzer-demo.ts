@@ -1,4 +1,4 @@
-import { PUTMANWaveAnalyzer } from '../analyzers/PUTMANWaveAnalyzer'
+import { PUTMANWaveAnalyzer } from '../modules/PUTMANWaveAnalyzer'
 import { WaveNode }           from '../types/WaveNode'
 
 const sample: WaveNode[] = []
